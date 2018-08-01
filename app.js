@@ -4,16 +4,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var expressHbs = require('express-handlebars');
+var helpers = require('handlebars-helpers')();
 var mongoose = require('mongoose'); 
 
 var indexRouter = require('./routes/index');
 
 var app = express();
 
-//mongoose.connect('localhost:27017/kinonhockeydb');
+mongoose.connect('mongodb://localhost:27017/kinonhockeydb');
 
 // view engine setup
-app.engine('.hbs', expressHbs({defaultLayout: 'layout', extname: '.hbs'}));
+app.engine('.hbs', expressHbs({defaultLayout: 'layout', extname: '.hbs', helpers: helpers}));
 //app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', '.hbs');
 
